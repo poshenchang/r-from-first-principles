@@ -1,0 +1,18 @@
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+## Section 5.2 exercises
+
+1.  For each of the sample tables, describe what each observation and each column represents.
+
+2.  Sketch out the process you'd use to calculate the `rate` for `table2` and `table3`.
+    You will need to perform four operations:
+
+    a.  Extract the number of TB cases per country per year.
+    b.  Extract the matching population per country per year.
+    c.  Divide cases by population, and multiply by 10000.
+    d.  Store back in the appropriate place.
+
+    You haven't yet learned all the functions you'd need to actually perform these operations, but you should still be able to think through the transformations you'd need.\
+    A: For `table2`, we would need to extract the number of cases and population by filtering by `type`, and then possibly joining them back together to compute the rate. For `table3`, we need to parse the string `rate` to get the number of cases and population, then divide the two to get the rate.
