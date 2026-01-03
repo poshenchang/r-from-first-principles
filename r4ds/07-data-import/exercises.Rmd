@@ -1,0 +1,71 @@
+---
+title: "Exercises"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+## Section 7.2 exercises
+
+1.  What function would you use to read a file where fields were separated with "\|"?\
+    A: with `read_delim(file, "|")`.
+
+2.  Apart from `file`, `skip`, and `comment`, what other arguments do `read_csv()` and `read_tsv()` have in common?
+
+3.  What are the most important arguments to `read_fwf()`?\
+    A: `col_positions` and `col_types`.
+
+4.  Sometimes strings in a CSV file contain commas.
+    To prevent them from causing problems, they need to be surrounded by a quoting character, like `"` or `'`. By default, `read_csv()` assumes that the quoting character will be `"`.
+    To read the following text into a data frame, what argument to `read_csv()` do you need to specify?\
+    A:
+    ```{r}
+    read_csv("x,y\n1,'a,b'", quote = "\'")
+    ```
+
+5.  Identify what is wrong with each of the following inline CSV files.
+    What happens when you run the code?
+
+    ```{r}
+    #| eval: false
+    read_csv("a,b\n1,2,3\n4,5,6")
+    read_csv("a,b,c\n1,2\n1,2,3,4")
+    read_csv("a,b\n\"1")
+    read_csv("a,b\n1,2\na,b")
+    read_csv("a;b\n1;3")
+    ```
+
+6.  Practice referring to non-syntactic names in the following data frame by:
+
+    a.  Extracting the variable called `1`.
+    b.  Plotting a scatterplot of `1` vs. `2`.
+    c.  Creating a new column called `3`, which is `2` divided by `1`.
+    d.  Renaming the columns to `one`, `two`, and `three`.
+
+    ```{r}
+    annoying <- tibble(
+      `1` = 1:10,
+      `2` = `1` * 2 + rnorm(length(`1`))
+    )
+    
+    annoying |> 
+      select(`1`)
+    
+    annoying |> 
+      ggplot(
+        aes(x = `1`, y = `2`)
+      ) + 
+      geom_point()
+    
+    annoying |> 
+      mutate(
+        `3` = `2` / `1`
+      ) |> 
+      rename(
+        one = `1`, 
+        two = `2`, 
+        three = `3`
+      )
+    ```
